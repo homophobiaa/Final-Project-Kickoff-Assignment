@@ -8,6 +8,18 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <ClientDir>$(MSBuildProjectDirectory)\..\..\client\</ClientDir>
   </PropertyGroup>
+
+  <!--
+    A fresh clone has no built UI. Build it once before the server compiles, so
+    `dotnet run` is the only command needed. Skipped when wwwroot already exists
+    (use `npm run build` or `npm run dev` in client/ while working on the UI).
+  -->
+  <Target Name="BuildClient" BeforeTargets="Build" Condition="!Exists('$(MSBuildProjectDirectory)\wwwroot\index.html') And Exists('$(ClientDir)package.json')">
+    <Message Importance="high" Text="Safelight: building the web UI (first run only)..." />
+    <Exec Command="npm install" WorkingDirectory="$(ClientDir)" Condition="!Exists('$(ClientDir)node_modules')" />
+    <Exec Command="npm run build" WorkingDirectory="$(ClientDir)" />
+  </Target>
 
 </Project>
