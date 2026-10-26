@@ -1,0 +1,57 @@
+.app {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 324px minmax(0, 1fr) 300px;
+  grid-template-rows: 68px minmax(0, 1fr);
+  grid-template-areas:
+    'header header header'
+    'setup main queue';
+  height: 100vh;
+}
+
+.main {
+  grid-area: main;
+  display: grid;
+  align-content: start;
+  gap: 30px;
+  min-width: 0;
+  padding: 20px 24px 48px;
+  overflow-y: auto;
+}
+
+@media (max-width: 1280px) {
+  .app {
+    grid-template-columns: 296px minmax(0, 1fr) 260px;
+  }
+}
+
+/* Narrow screens: one scrolling column. */
+@media (max-width: 1100px) {
+  body {
+    overflow: auto;
+  }
+
+  .app {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto;
+    grid-template-areas: 'header' 'setup' 'main' 'queue';
+    height: auto;
+  }
+
+  .setup,
+  .queue {
+    border: 0;
+    border-top: 1px solid var(--line);
+    overflow: visible;
+  }
+
+  .queue {
+    height: 520px;
+  }
+
+  .main {
+    overflow: visible;
+    padding: 20px 16px 40px;
+  }
+}
