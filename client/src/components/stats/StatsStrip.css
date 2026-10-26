@@ -1,0 +1,128 @@
+.stats {
+  display: grid;
+  gap: 14px;
+}
+
+.stats--loading {
+  height: 92px;
+}
+
+.stats__tiles {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 0.8fr)) repeat(2, minmax(0, 1.2fr));
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: rgba(22, 19, 17, 0.7);
+  overflow: hidden;
+}
+
+.tile {
+  display: grid;
+  gap: 6px;
+  align-content: start;
+  padding: 12px 16px 11px;
+  border-left: 1px solid var(--line);
+  min-width: 0;
+}
+
+.tile:first-child {
+  border-left: 0;
+}
+
+.tile__value {
+  font-size: 34px;
+  line-height: 1;
+  font-style: italic;
+}
+
+.tile__value--small {
+  font-size: 14px;
+  line-height: 34px;
+  height: 34px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tile__arrow {
+  color: var(--safe);
+}
+
+.tile__sub {
+  min-height: 14px;
+  font-size: 10.5px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tile--fix .tile__value { color: var(--fix); }
+.tile--dye .tile__value { color: var(--dye); }
+
+.tile--pulse .tile__sub {
+  color: var(--safe-hi);
+  animation: pulse-text 1.2s var(--ease-in-out) infinite;
+}
+
+@keyframes pulse-text {
+  50% { opacity: 0.4; }
+}
+
+.progress {
+  position: relative;
+  display: flex;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--line);
+  overflow: hidden;
+}
+
+.progress__seg {
+  height: 100%;
+  transition: width 420ms var(--ease-out);
+}
+
+.progress__seg--done { background: var(--paper); }
+.progress__seg--failed { background: var(--dye); }
+.progress__seg--cancelled { background: var(--faint); }
+
+.progress__seg--flight {
+  background: linear-gradient(90deg, var(--safe-deep), var(--safe), var(--safe-hi), var(--safe), var(--safe-deep));
+  background-size: 200% 100%;
+  animation: flight 1.4s linear infinite;
+  box-shadow: 0 0 10px var(--safe);
+}
+
+.progress.is-paused .progress__seg--flight {
+  background: var(--amber);
+  animation: none;
+  box-shadow: none;
+}
+
+.progress.is-scanning::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(239, 230, 216, 0.25), transparent);
+  width: 30%;
+  animation: sweep 1.6s var(--ease-in-out) infinite;
+}
+
+@keyframes flight {
+  to { background-position: -200% 0; }
+}
+
+@media (max-width: 1280px) {
+  .stats__tiles {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .tile:nth-child(4) {
+    border-left: 0;
+  }
+
+  .tile:nth-child(n + 4) {
+    border-top: 1px solid var(--line);
+  }
+}
