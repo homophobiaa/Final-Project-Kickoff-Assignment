@@ -27,7 +27,8 @@ export function QueuePanel() {
 
       <div className={clsx('filmstrip', status === 'Paused' && 'is-paused')}>
         <ol className="filmstrip__frames">
-          <AnimatePresence initial={false}>
+          {/* popLayout: a taken frame leaves the flow at once, so the rest slide up while it fades out */}
+          <AnimatePresence initial={false} mode="popLayout">
             {head.map((job) => {
               const { dir, name } = splitPath(job.relativePath)
               return (

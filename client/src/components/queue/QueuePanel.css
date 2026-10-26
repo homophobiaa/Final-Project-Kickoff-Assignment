@@ -45,6 +45,7 @@
 }
 
 .filmstrip__frames {
+  position: relative;
   display: grid;
   gap: 4px;
   margin: 0;
