@@ -66,10 +66,9 @@ export function TimelinePanel() {
     let lastKey = ''
 
     const resize = () => {
-      const rect = wrap.getBoundingClientRect()
       const dpr = window.devicePixelRatio || 1
-      width = rect.width
-      height = rect.height
+      width = wrap.clientWidth
+      height = wrap.clientHeight
       canvas.width = Math.round(width * dpr)
       canvas.height = Math.round(height * dpr)
       canvas.style.width = `${width}px`

@@ -8,7 +8,10 @@
   touch-action: none;
 }
 
+/* Out of flow: the canvas is sized from its container, so it must never size the container. */
 .timeline canvas {
+  position: absolute;
+  inset: 0;
   display: block;
 }
 
