@@ -125,15 +125,10 @@ Each piece of shared state has exactly one guard.
 Requirements: **.NET 10 SDK** and **Node.js 22+**.
 
 ```bash
-# 1. build the UI into the server's wwwroot
-cd client
-npm install
-npm run build
-
-# 2. run the server (opens http://localhost:5080)
-cd ..
 dotnet run --project src/Safelight.Server
 ```
+
+The first run builds the web UI automatically (`npm install` + `npm run build`), so that single command is enough. The server listens on **http://localhost:5080**.
 
 Then click **Sample roll** (or choose your own source folder), and press **Start**.
 
